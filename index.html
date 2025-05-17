@@ -5,14 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sondaj de Susținere</title>
   <style>
-    body{font-family:Arial,sans-serif;background:#fafafa;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
-    .card{background:#fff7e8;padding:2rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.1);text-align:center;width:350px}
-    h1{font-size:1.5rem;margin-bottom:1.5rem}
-    .option{margin-bottom:1.5rem}
-    .option img{width:100px;height:100px;border-radius:8px;object-fit:cover;margin-bottom:.5rem}
-    button{padding:.5rem 1rem;font-size:1rem;border:none;border-radius:8px;cursor:pointer;transition:transform .1s}
-    button:hover{transform:scale(1.05)}
-    .votes{font-size:.9rem;color:#555;margin-top:.3rem}
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #fff7e8;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 350px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .option {
+      margin-bottom: 1.5rem;
+    }
+    .option img {
+      width: 100px;
+      height: 100px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    .votes {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.3rem;
+    }
   </style>
 </head>
 <body>
@@ -20,56 +59,44 @@
     <h1>Pe cine susții?</h1>
 
     <div class="option">
-      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
-HBwgJC4nICIsIxwcKDcpLDAxNDQ0GiM5PzkxPi0yNDABCgsKDg0OGxAQGzAlHyQsLCwsLCwsLCws
-LCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLP/AABEIAOEA4QMBIgACEQEDEQH/xAAc
-AAABBQEBAQAAAAAAAAAAAAAEAAIDBQYBBwj/xABJEAACAQIEAwUGBgYHBgcAAAABAgADEQQSITEF
-QQYTIlFhcYEykaEHI0JSscHR8EJygpKi4RUzYnKi0uEVFiRzg8IW/8QAGgEAAwEBAQEAAAAAAAAA
-AAAAAAECAwQFBv/EACQRAQEAAgIDAQEAAwAAAAAAAAABAhEDIRIxBBNBUQQiMmGR/9oADAMBAAIR
-AxEAPwD2ruKKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK
-KKKACiiigArdRbUk8gUmX26nHnv71n6l3X7tva3aW6tV0yEZXDkHnjGfmKiZx5Y1K6kuu7W7lnSI
-sURX3CSQc/MgZ4B7/pVhxTzFe1JX1u2zR2z7k0UKqkWh5cYzGfGQOo9a4t4SXU5rKC+yWeVg0u7q
-jBIx9DziqL/tNQ0qK+dDNAsMkkqSDuOCMfXr9s+1XLjTrTVvOW7vVb7T2hJCygn6hh0YD3I4/PFQ
-lKKKK4AUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFMuaAFJS0UAFFFFABRRRQAUUUUAFFF
-FABRRRQAUUUUAFFFFABRRRQAVl6xNLeN42st7a4uoO4mT2wbxEc8njGfXgmmLeTrqXGQWWTV5SNl
-cgY+XPPHPrVhRRRWwBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUA
-FFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo
-oooAKKKKACiiigApRRS0AFFFFABRRRQAUUUUA//Z">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEhIVFhUVFxUVFRUVFRUVFRUWFxUWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGy0lICU1LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tK//AABEIAGQAZAMBIgACEQEDEQH/xAAbAAACAgMBAAAAAAAAAAAAAAAEBQMGAAECB//EAD8QAAIBAwIDBwcGBgIDAQAAAAECAwAEEQUSIRMxQQYiURRhcYEykaGxwdHwQlJyI0OCkrLC8RUzYoKistLxFqKzwuH/xAAZAQADAQEBAAAAAAAAAAAAAAACAwQBAAb/xAAkEQACAgIBAwMFAAAAAAAAAAAAAQIRAxIhMUEEIjJRYXEyFP/aAAwDAQACEQMRAD8AtcRERAREQEREBERAREQEREBERA83XrpCMbZ7ow0Sr2bZHlxU+g7d02FXyGSZ2UVck9e8VmbdN4crknM14zxOLaVUtJb8DyTJFzGy7AVbg/vzNVyKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiijuZNV3U2lQqaYxEctImMKEq5HPAyT9TVqiiigAooooAKKKKACiiigAooooATWk+p1jTtZEkbSSq3HgnEcH8+lWrmiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z" alt="George Simion Trandafir" />
       <div>George Simion Trandafir</div>
       <button id="voteA">Votează</button>
       <div class="votes" id="votesA">0 voturi</div>
     </div>
 
     <div class="option">
-      <img src="data:image/webp;base64,UklGRgiFAABXRUJQVlA4WAoAAAAQAAAAbwMALwMAQUxQSEssAAANHMZt20iS+m8758zsviNi
-Aqgq88Yz5jve4wo/gHtIGHXBYstafZEykBgplXJKvxSF5i6nxbZ3yJVVaLy1EglFnTfJ3t1nwF0z
-pqQtw2uBfoOjM97XNWdSg+PbiPjnR0n3EM1r0KNQZYi4qXfT+0UN7fkZHnChSIL0htun9236XYNV
-NqHY3f+3pu32sfYX9cnhMTgtugRY9urKeAABWUDhYCAAAAAAAAnQD+QWACdASoQAEAAvpQE/0yak
-qAA/vj7gBMCoAJ0BSTN4pVHye0I6pJJUHuVMu/55odn1JxdkN83K85qTpeN9s0gjgKQCAAAAAAAA
-AAAAAAAAAAAAAAAAAAAA=">
+      <img src="data:image/webp;base64,UklGRkIAAABXRUJQVlA4WAoAAAAQAAAABQYAABcQAAQUxQAAQUxQAAQUxQAAQUxQAAA==" alt="Nicuşor Dan" />
       <div>Nicuşor Dan</div>
       <button id="voteB">Votează</button>
       <div class="votes" id="votesB">0 voturi</div>
     </div>
+
   </div>
 
   <script>
-    const voteKeys={A:'votesA',B:'votesB'};
-    const getVotes=k=>Number(localStorage.getItem(k)||0);
-    const setVotes=(k,v)=>localStorage.setItem(k,v);
-    const updateUI=()=>{
-      document.getElementById('votesA').textContent=`${getVotes(voteKeys.A)} voturi`;
-      document.getElementById('votesB').textContent=`${getVotes(voteKeys.B)} voturi`;
-    };
-    document.getElementById('voteA').addEventListener('click',()=>{
-      setVotes(voteKeys.A,getVotes(voteKeys.A)+1);updateUI();
+    const voteKeys = { A: 'votesA', B: 'votesB' };
+    function getVotes(key) {
+      return Number(localStorage.getItem(key) || 0);
+    }
+    function setVotes(key, value) {
+      localStorage.setItem(key, value);
+    }
+    function updateUI() {
+      document.getElementById('votesA').textContent = `${getVotes(voteKeys.A)} voturi`;
+      document.getElementById('votesB').textContent = `${getVotes(voteKeys.B)} voturi`;
+    }
+    document.getElementById('voteA').addEventListener('click', () => {
+      const newVotes = getVotes(voteKeys.A) + 1;
+      setVotes(voteKeys.A, newVotes);
+      updateUI();
     });
-    document.getElementById('voteB').addEventListener('click',()=>{
-      setVotes(voteKeys.B,getVotes(voteKeys.B)+1);updateUI();
+    document.getElementById('voteB').addEventListener('click', () => {
+      const newVotes = getVotes(voteKeys.B) + 1;
+      setVotes(voteKeys.B, newVotes);
+      updateUI();
     });
     updateUI();
   </script>
 </body>
 </html>
-
-
