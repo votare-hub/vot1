@@ -1,102 +1,44 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sondaj de Susținere</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fafafa;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .card {
-      background: #fff7e8;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 350px;
-    }
-    h1 {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .option {
-      margin-bottom: 1.5rem;
-    }
-    .option img {
-      width: 100px;
-      height: 100px;
-      border-radius: 8px;
-      object-fit: cover;
-      margin-bottom: 0.5rem;
-    }
-    button {
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
-    button:hover {
-      transform: scale(1.05);
-    }
-    .votes {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 0.3rem;
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sondaj de Susținere</title>
+<style>
+body{font-family:Arial, sans-serif;background:#fafafa;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
+.card{background:#fff7e8;padding:2rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.1);text-align:center;width:350px}
+h1{font-size:1.5rem;margin-bottom:1.5rem}
+.option{margin-bottom:1.5rem}
+.option img{width:100px;height:100px;border-radius:8px;object-fit:cover;margin-bottom:.5rem}
+button{padding:.5rem 1rem;font-size:1rem;border:none;border-radius:8px;cursor:pointer;transition:transform .1s}
+button:hover{transform:scale(1.05)}
+.votes{font-size:.9rem;color:#555;margin-top:.3rem}
+</style>
 </head>
 <body>
-  <div class="card">
-    <h1>Pe cine susții?</h1>
-
-    <div class="option">
-      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEhIVFhUVFxUVFRUVFRUVFRUWFxUWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGy0lICU1LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tK//AABEIAGQAZAMBIgACEQEDEQH/xAAbAAACAgMBAAAAAAAAAAAAAAAEBQMGAAECB//EAD8QAAIBAwIDBwcGBgIDAQAAAAECAwAEEQUSIRMxQQYiURRhcYEykaGxwdHwQlJyI0OCkrLC8RUzYoKistLxFqKzwuH/xAAZAQADAQEBAAAAAAAAAAAAAAACAwQBAAb/xAAkEQACAgIBAwMFAAAAAAAAAAAAAQIRAxIhMUEEIjJRYXEyFP/aAAwDAQACEQMRAD8AtcRERAREQEREBERAREQEREBERA83XrpCMbZ7ow0Sr2bZHlxU+g7d02FXyGSZ2UVck9e8VmbdN4crknM14zxOLaVUtJb8DyTJFzGy7AVbg/vzNVyKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiijuZNV3U2lQqaYxEctImMKEq5HPAyT9TVqiiigAooooAKKKKACiiigAooooATWk+p1jTtZEkbSSq3HgnEcH8+lWrmiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z" alt="George Simion Trandafir" />
-      <div>George Simion Trandafir</div>
-      <button id="voteA">Votează</button>
-      <div class="votes" id="votesA">0 voturi</div>
-    </div>
-
-    <div class="option">
-      <img src="data:image/webp;base64,UklGRkIAAABXRUJQVlA4WAoAAAAQAAAABQYAABcQAAQUxQAAQUxQAAQUxQAAQUxQAAA==" alt="Nicuşor Dan" />
-      <div>Nicuşor Dan</div>
-      <button id="voteB">Votează</button>
-      <div class="votes" id="votesB">0 voturi</div>
-    </div>
-
-  </div>
-
-  <script>
-    const voteKeys = { A: 'votesA', B: 'votesB' };
-    function getVotes(key) {
-      return Number(localStorage.getItem(key) || 0);
-    }
-    function setVotes(key, value) {
-      localStorage.setItem(key, value);
-    }
-    function updateUI() {
-      document.getElementById('votesA').textContent = `${getVotes(voteKeys.A)} voturi`;
-      document.getElementById('votesB').textContent = `${getVotes(voteKeys.B)} voturi`;
-    }
-    document.getElementById('voteA').addEventListener('click', () => {
-      const newVotes = getVotes(voteKeys.A) + 1;
-      setVotes(voteKeys.A, newVotes);
-      updateUI();
-    });
-    document.getElementById('voteB').addEventListener('click', () => {
-      const newVotes = getVotes(voteKeys.B) + 1;
-      setVotes(voteKeys.B, newVotes);
-      updateUI();
-    });
-    updateUI();
-  </script>
+<div class="card">
+<h1>Pe cine susții?</h1>
+<div class="option">
+<img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEhIVFhUVFxUVFRUVFRUVFRUWFxUWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGy0lICU1LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tK//AABEIAGQAZAMBIgACEQEDEQH/xAAbAAACAgMBAAAAAAAAAAAAAAAEBQMGAAECB//EAD8QAAIBAwIDBwcGBgIDAQAAAAECAwAEEQUSIRMxQQYiURRhcYEykaGxwdHwQlJyI0OCkrLC8RUzYoKistLxFqKzwuH/xAAZAQADAQEBAAAAAAAAAAAAAAACAwQBAAb/xAAkEQACAgIBAwMFAAAAAAAAAAAAAQIRAxIhMUEEIjJRYXEyFP/aAAwDAQACEQMRAD8AtcRERAREQEREBERAREQEREBERA83XrpCMbZ7ow0Sr2bZHlxU+g7d02FXyGSZ2UVck9e8VmbdN4crknM14zxOLaVUtJb8DyTJFzGy7AVbg/vzNVyKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiijuZNV3U2lQqaYxEctImMKEq5HPAyT9TVqiiigAooooAKKKKACiiigAooooATWk+p1jTtZEkbSSq3HgnEcH8+lWrmiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z" alt="George Simion Trandafir"/>
+<div>George Simion Trandafir</div>
+<button id="voteA">Votează</button>
+<div class="votes" id="votesA">0 voturi</div>
+</div>
+<div class="option">
+<img src="data:image/webp;base64,UklGRkIAAABXRUJQVlA4WAoAAAAQAAAABQYAABcQAAQUxQAAQUxQAAQUxQAAQUxQAAA==" alt="Nicuşor Dan"/>
+<div>Nicuşor Dan</div>
+<button id="voteB">Votează</button>
+<div class="votes" id="votesB">0 voturi</div>
+</div>
+</div>
+<script>
+const voteKeys={A:'votesA',B:'votesB'};
+const g=k=>+localStorage.getItem(k)||0;
+const s=(k,v)=>localStorage.setItem(k,v);
+const u=()=>{votesA.textContent=g(voteKeys.A)+' voturi';votesB.textContent=g(voteKeys.B)+' voturi'};
+voteA.onclick=()=>{s(voteKeys.A,g(voteKeys.A)+1);u()};
+voteB.onclick=()=>{s(voteKeys.B,g(voteKeys.B)+1);u()};
+u();
+</script>
 </body>
 </html>
