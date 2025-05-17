@@ -41,6 +41,10 @@
     button:hover {
       background-color: #0056b3;
     }
+    .votes {
+      margin-top: 8px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -49,18 +53,40 @@
     <div class="candidate">
       <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAx" alt="George Simion">
       <h3>George Simion Trandafir</h3>
-      <button onclick="vote('George Simion')">Votează</button>
+      <button onclick="vote('george')">Votează</button>
+      <div class="votes" id="georgeCount">0 voturi</div>
     </div>
     <div class="candidate">
       <img src="data:image/webp;base64,UklGRgiFAABXRUJQVlA4WAoAAAAQAAAAbwMALwMAQUxQSEssAAANHMZt20iS+m8758zsviNiAqgq88Yz5jve4wo/gHtIGHXBYsta" alt="Nicușor Dan">
       <h3>Nicușor Dan Minge de Baschet</h3>
-      <button onclick="vote('Nicusor Dan')">Votează</button>
+      <button onclick="vote('nicusor')">Votează</button>
+      <div class="votes" id="nicusorCount">0 voturi</div>
     </div>
   </div>
   <script>
-    function vote(name) {
-      alert('Ai votat pentru: ' + name);
+    const keys = { george: 'votesGeorge', nicusor: 'votesNicusor' };
+
+    // initialize counts if not present
+    for (const k in keys) {
+      if (localStorage.getItem(keys[k]) === null) {
+        localStorage.setItem(keys[k], '0');
+      }
     }
+
+    function updateUI() {
+      document.getElementById('georgeCount').textContent = localStorage.getItem(keys.george) + ' voturi';
+      document.getElementById('nicusorCount').textContent = localStorage.getItem(keys.nicusor) + ' voturi';
+    }
+
+    function vote(id) {
+      const current = parseInt(localStorage.getItem(keys[id])) || 0;
+      localStorage.setItem(keys[id], current + 1);
+      updateUI();
+      alert('Ai votat pentru: ' + (id === 'george' ? 'George Simion' : 'Nicușor Dan'));
+    }
+
+    // on load
+    updateUI();
   </script>
 </body>
 </html>
