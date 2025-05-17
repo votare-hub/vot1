@@ -99,3 +99,14 @@
   </script>
 </body>
 </html>
+# dacă nu ai repo-ul local
+git clone https://github.com/votare-hub/vot1.git
+cd vot1
+
+# copiază imaginile în acest folder
+cp /cale/catre/george.jpg .
+cp /cale/catre/nicusor.webp .
+
+git add george.jpg nicusor.webp
+git commit -m "Adaug imaginile candidaților"
+git push origin main
