@@ -1,112 +1,75 @@
 <!DOCTYPE html>
 <html lang="ro">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sondaj de Susținere</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sondaj de Susținere</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:#fafafa;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
+    .card{background:#fff7e8;padding:2rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.1);text-align:center;width:350px}
+    h1{font-size:1.5rem;margin-bottom:1.5rem}
+    .option{margin-bottom:1.5rem}
+    .option img{width:100px;height:100px;border-radius:8px;object-fit:cover;margin-bottom:.5rem}
+    button{padding:.5rem 1rem;font-size:1rem;border:none;border-radius:8px;cursor:pointer;transition:transform .1s}
+    button:hover{transform:scale(1.05)}
+    .votes{font-size:.9rem;color:#555;margin-top:.3rem}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Pe cine susții?</h1>
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #fafafa;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-      }
-      .card {
-        background: #fff7e8;
-        padding: 2rem;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        width: 350px;
-      }
-      h1 {
-        font-size: 1.6rem;
-        margin-bottom: 2rem;
-      }
-      .option {
-        margin-bottom: 2rem;
-      }
-      .option img {
-        width: 100px;
-        height: 100px;
-        border-radius: 8px;
-        object-fit: cover;
-        margin-bottom: 0.5rem;
-      }
-      .nume {
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-      }
-      button {
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        border: none;
-        border-radius: 8px;
-        background: #ffd27d;
-        cursor: pointer;
-        transition: transform 0.1s ease, background 0.2s ease;
-      }
-      button:hover {
-        transform: scale(1.05);
-        background: #ffca63;
-      }
-      .votes {
-        font-size: 0.9rem;
-        color: #555;
-        margin-top: 0.4rem;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="card">
-      <h1>Pe cine susții?</h1>
-
-      <div class="option">
-        <img
-          src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAPEBURDxAVFRAQFRAPEA8QDw8PDw8QFREWFhURFRMYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGhAQGi0fICUtKy0tKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKgBLAMBIgACEQEDEQH/xAAbAAADAQEBAQEAAAAAAAAAAAABAgMBBAYFB//EAD0QAAIBAgQEAwYDBgQEBwAAAAECAAMRBAUSITFBBhMiUWEHEzKREyNCUoGRobHB0fAVFiQzU3KS8SNSYpLC/8QAGAEAAwEBAAAAAAAAAAAAAAAAAwQFAAL/xAAoEQACAgICAgAGAwEAAAAAAAAAAQIRAyESMUFREyJhcSIygZHB8P/aAAwDAQACEQMRAD8A9uSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB5bt9VeLqXKt2Nlh8oH3OJl2HcPbbbTsbug9xvaylLU2p9ZNMXKjz3Q7Vwd5c+38c9uU6kqt7o0ZVhXfVqM6VMrV6MTD1F0xW+VqcfjJznPJ9URda6pSq0pebR2o7VZkzNGk9x3V6Jz0qxX17Uo8rR17WTT6S3vM3Vv1Jnv/ADpMdylLTWmoT3Ro2pWMdMx0Mt131pSVK8s7K1HWrVjEYPEz5nJrY5VrV6UppUrG6inasXqpjHdXORh5PFerauF3E1ZTTin3Gp2eaNVOlVUk1eZo1PN7xzufLSp8c4ZOM5zTKpONqnKXqvspv2UZRaednUfVXp8ppnljWm/ZR4jGnNcl8q8xtmljHNNjS+llvBnr7zp09dl6id35zmkpKk3+aUvPNtGr2jFvct84a2W9add9a1xzRSjOpLV2cfNxtbnEyXWcl1ckrj5aYmo48X6k/yWKM2mt6M3ENMzx5qlbWqG9a1eu0rLmdGfYy17KM69t8txtbafGPJQ2YR3FIrZs1p8ExuHSSWr5fF+eCVpJK6lFd7M51xrKcprj1t35xf3iVJeSlNRaa3t76zTXe8O2qW7Iktp25lsvWnDPml8jjuJvE6TlKVnNpuRStzEbozUZVjC70V7zv2n87aURLzAAAAAAAAAAAAAAAHk3k/Tn6+W5fKz4zqO8n1nKjsdZpxMfv4pONitXayS2s5b7SScfyf1y2Yxcq43OI97ærJrU4rtaU5c5xWnC3LyfG/vJ3u6vZafcTTvLz/s1eMpoZf2iyy+GL8XzzXnU1N+aXOHqeNfP/H3n3r8m8+Px9iHMXOlyqR0qbMSiujPauzw6ljaNlG9LZ0pXlGuxr4f8U7K781pn4Y7Ht4S0p3F6cula1ldXlRs8+Jot04ptXOvfqSfUuSS+OxuLWl2qdK3p5yS6b8kpbfTK0pS4ytPekm2mml1uomvo69J+nNkmqL2bfY6cO3WcotvF2PZOl9o34eV6jvbfEMerKXiv6yfpMRnKzXSDhF1uxp7dY21HTcoxdF9Sn9WH7TXu094JKn3vtXanRN1O3z13y1q7GdElKO+ba26t3O1vT+T1tS0qWjtl1vLyrE1jkuMZVvG6Zj8EV5u+aNMt1pSlCpwu7uuux1TGrO97tXjvRP8Aa3TyYnG5S1nNSeFxt6aYt6qN0W+5bRY6U2e1Gvrex7T8qeE4pNdlvaD9JNHsXaeWrWnipNq1ZYwlu8p8lzOuNvBxN6ssswrZKSt3NTjF4rYxWWNlbckovG0qt81uHknkkk9PDpKM5zlKeKyl3YRvL66YutY7bfaH4st9uh3d2lrPRvSmnzJqkuqXTpJzT9kHL5fMXvkrK6ySudzj4p3N0lZpeVuZTUoy66tHSt0zZybXK6svW5ptr6Sm3XOxM16ct4ORhylGMZRuRrX0apsni9gr6ZKa1v8Alj1PX3rjlvcl2fzWreVl6XFWeio5X12W5c5ae3cZ6S5K1a8MF1bkvQ7pOTlGblTXN0pSnJY3xvFL0WNFv8PpYpt3UnPvw9O70bH1tvG2/E0hC+umdX4aO7iji9P1eSPk7Lklb1D4b4uO/y9JVZZJta0/Y7sY1y78jEAAAAAAAAAAAAAAAB5X3uY+escqsnyW9RcZ6iTnmfP4q4cnHcU6qY1NJ2u2n08cz19WTyPL6zJNRbhN64lOmuOSrfms37T2Pzytn+qW7XtM8kk7mEpfk3OcznFxr61G0qV0mu7tKzvqyazVuZ+63bc3aS8T1R4pRmlKUpyp3S6O3Ff8vE79dy0vT0ep6akqTqTltjKMp7x2XMx1/8Aft9F9Iu6i7NWnj1svDFGXcXsquxeOumtZp8N1U7XSvt/2j88voAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==" 
-          alt="George Simion Trandafir"
-        />
-        <div class="nume">George Simion Trandafir</div>
-        <button id="voteA">Votează</button>
-        <div class="votes" id="votesA">0 voturi</div>
-      </div>
-
-      <div class="option">
-        <img
-          src="data:image/webp;base64,UklGRnwAAABXRUJQVlA4WAoAAAAQAAAABwAABwAAQUxQSAwAAAAwAQCdASoQABAABUB8JbACdADdAP63jI0iAA=="
-          alt="Nicuşor Dan"
-        />
-        <div class="nume">Nicuşor Dan</div>
-        <button id="voteB">Votează</button>
-        <div class="votes" id="votesB">0 voturi</div>
-      </div>
+    <div class="option">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+HBwgJC4nICIsIxwcKDcpLDAxNDQ0GiM5PzkxPi0yNDABCgsKDg0OGxAQGzAlHyQsLCwsLCwsLCws
+LCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLP/AABEIAOEA4QMBIgACEQEDEQH/xAAc
+AAABBQEBAQAAAAAAAAAAAAAEAAIDBQYBBwj/xABJEAACAQIEAwUGBgYHBgcAAAABAgADEQQSITEF
+QQYTIlFhcYEykaEHI0JSscHR8EJygpKi4RUzYnKi0uEVFiRzg8IW/8QAGgEAAwEBAQEAAAAAAAAA
+AAAAAAECAwQFBv/EACQRAQEAAgIDAQEAAwAAAAAAAAABAhEDIRIxBBNBUQQiMmGR/9oADAMBAAIR
+AxEAPwD2ruKKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK
+KKKACiiigArdRbUk8gUmX26nHnv71n6l3X7tva3aW6tV0yEZXDkHnjGfmKiZx5Y1K6kuu7W7lnSI
+sURX3CSQc/MgZ4B7/pVhxTzFe1JX1u2zR2z7k0UKqkWh5cYzGfGQOo9a4t4SXU5rKC+yWeVg0u7q
+jBIx9DziqL/tNQ0qK+dDNAsMkkqSDuOCMfXr9s+1XLjTrTVvOW7vVb7T2hJCygn6hh0YD3I4/PFQ
+lKKKK4AUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFMuaAFJS0UAFFFFABRRRQAUUUUAFFF
+FABRRRQAUUUUAFFFFABRRRQAVl6xNLeN42st7a4uoO4mT2wbxEc8njGfXgmmLeTrqXGQWWTV5SNl
+cgY+XPPHPrVhRRRWwBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUA
+FFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo
+oooAKKKKACiiigApRRS0AFFFFABRRRQAUUUUA//Z">
+      <div>George Simion Trandafir</div>
+      <button id="voteA">Votează</button>
+      <div class="votes" id="votesA">0 voturi</div>
     </div>
 
-    <script>
-      const voteKeys = { A: "votesA", B: "votesB" };
-      const getVotes = (k) => Number(localStorage.getItem(k) || 0);
-      const setVotes = (k, v) => localStorage.setItem(k, v);
-      const updateUI = () => {
-        document.getElementById("votesA").textContent =
-          getVotes(voteKeys.A) + " voturi";
-        document.getElementById("votesB").textContent =
-          getVotes(voteKeys.B) + " voturi";
-      };
-      document.getElementById("voteA").addEventListener("click", () => {
-        setVotes(voteKeys.A, getVotes(voteKeys.A) + 1);
-        updateUI();
-      });
-      document.getElementById("voteB").addEventListener("click", () => {
-        setVotes(voteKeys.B, getVotes(voteKeys.B) + 1);
-        updateUI();
-      });
-      updateUI();
-    </script>
-  </body>
+    <div class="option">
+      <img src="data:image/webp;base64,UklGRgiFAABXRUJQVlA4WAoAAAAQAAAAbwMALwMAQUxQSEssAAANHMZt20iS+m8758zsviNi
+Aqgq88Yz5jve4wo/gHtIGHXBYstafZEykBgplXJKvxSF5i6nxbZ3yJVVaLy1EglFnTfJ3t1nwF0z
+pqQtw2uBfoOjM97XNWdSg+PbiPjnR0n3EM1r0KNQZYi4qXfT+0UN7fkZHnChSIL0htun9236XYNV
+NqHY3f+3pu32sfYX9cnhMTgtugRY9urKeAABWUDhYCAAAAAAAAnQD+QWACdASoQAEAAvpQE/0yak
+qAA/vj7gBMCoAJ0BSTN4pVHye0I6pJJUHuVMu/55odn1JxdkN83K85qTpeN9s0gjgKQCAAAAAAAA
+AAAAAAAAAAAAAAAAAAAA=">
+      <div>Nicuşor Dan</div>
+      <button id="voteB">Votează</button>
+      <div class="votes" id="votesB">0 voturi</div>
+    </div>
+  </div>
+
+  <script>
+    const voteKeys={A:'votesA',B:'votesB'};
+    const getVotes=k=>Number(localStorage.getItem(k)||0);
+    const setVotes=(k,v)=>localStorage.setItem(k,v);
+    const updateUI=()=>{
+      document.getElementById('votesA').textContent=`${getVotes(voteKeys.A)} voturi`;
+      document.getElementById('votesB').textContent=`${getVotes(voteKeys.B)} voturi`;
+    };
+    document.getElementById('voteA').addEventListener('click',()=>{
+      setVotes(voteKeys.A,getVotes(voteKeys.A)+1);updateUI();
+    });
+    document.getElementById('voteB').addEventListener('click',()=>{
+      setVotes(voteKeys.B,getVotes(voteKeys.B)+1);updateUI();
+    });
+    updateUI();
+  </script>
+</body>
 </html>
+
 
