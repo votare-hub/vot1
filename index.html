@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Harta Europei - Click pe țări</title>
+  <style>
+    svg {
+      width: 600px;
+      height: auto;
+      border: 1px solid #ccc;
+    }
+    .country {
+      cursor: pointer;
+      fill: #ccc;
+      stroke: #333;
+      stroke-width: 1;
+    }
+    .country:hover {
+      fill: #aaf;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Click pe o țară:</h2>
+<div>
+  <p>România: <span id="ro-count">0</span></p>
+  <p>Germania: <span id="de-count">0</span></p>
+  <p>Franța: <span id="fr-count">0</span></p>
+</div>
+
+<svg viewBox="0 0 500 400">
+  <!-- Acestea sunt forme foarte simplificate, doar ca exemplu -->
+  <path id="RO" class="country" d="M300,200 L320,200 L320,220 L300,220 Z" />
+  <path id="DE" class="country" d="M250,150 L270,150 L270,170 L250,170 Z" />
+  <path id="FR" class="country" d="M200,180 L220,180 L220,200 L200,200 Z" />
+</svg>
+
+<script>
+  const counters = {
+    RO: 0,
+    DE: 0,
+    FR: 0
+  };
+
+  document.querySelectorAll('.country').forEach(el => {
+    el.addEventListener('click', () => {
+      const id = el.id;
+      counters[id]++;
+      document.getElementById(id.toLowerCase() + '-count').textContent = counters[id];
+    });
+  });
+</script>
+
+</body>
+</html>
