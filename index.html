@@ -5,7 +5,7 @@
   <title>Harta Europei - Click pe țări</title>
   <style>
     svg {
-      width: 600px;
+      width: 100%;
       height: auto;
       border: 1px solid #ccc;
     }
@@ -13,41 +13,95 @@
       cursor: pointer;
       fill: #ccc;
       stroke: #333;
-      stroke-width: 1;
+      stroke-width: 0.5;
+      transition: fill 0.3s;
     }
     .country:hover {
-      fill: #aaf;
+      fill: #88f;
     }
   </style>
 </head>
 <body>
 
 <h2>Click pe o țară:</h2>
-<div>
-  <p>România: <span id="ro-count">0</span></p>
-  <p>Germania: <span id="de-count">0</span></p>
-  <p>Franța: <span id="fr-count">0</span></p>
-</div>
+<div id="counter-display"></div>
 
-<svg viewBox="0 0 500 400">
-  <!-- Acestea sunt forme foarte simplificate, doar ca exemplu -->
-  <path id="RO" class="country" d="M300,200 L320,200 L320,220 L300,220 Z" />
-  <path id="DE" class="country" d="M250,150 L270,150 L270,170 L250,170 Z" />
-  <path id="FR" class="country" d="M200,180 L220,180 L220,200 L200,200 Z" />
+<!-- Exemplu SVG schematic: fiecare țară este reprezentată ca un pătrat simplificat -->
+<svg viewBox="0 0 1000 1000">
+  <g id="map">
+    <path id="AL" class="country" d="M100,100 h20 v20 h-20 Z" title="Albania" />
+    <path id="AD" class="country" d="M130,100 h20 v20 h-20 Z" title="Andorra" />
+    <path id="AM" class="country" d="M160,100 h20 v20 h-20 Z" title="Armenia" />
+    <path id="AT" class="country" d="M190,100 h20 v20 h-20 Z" title="Austria" />
+    <path id="AZ" class="country" d="M220,100 h20 v20 h-20 Z" title="Azerbaidjan" />
+    <path id="BY" class="country" d="M250,100 h20 v20 h-20 Z" title="Belarus" />
+    <path id="BE" class="country" d="M280,100 h20 v20 h-20 Z" title="Belgia" />
+    <path id="BA" class="country" d="M310,100 h20 v20 h-20 Z" title="Bosnia și Herțegovina" />
+    <path id="BG" class="country" d="M340,100 h20 v20 h-20 Z" title="Bulgaria" />
+    <path id="HR" class="country" d="M370,100 h20 v20 h-20 Z" title="Croația" />
+    <path id="CY" class="country" d="M400,100 h20 v20 h-20 Z" title="Cipru" />
+    <path id="CZ" class="country" d="M430,100 h20 v20 h-20 Z" title="Cehia" />
+    <path id="DK" class="country" d="M460,100 h20 v20 h-20 Z" title="Danemarca" />
+    <path id="EE" class="country" d="M490,100 h20 v20 h-20 Z" title="Estonia" />
+    <path id="FI" class="country" d="M520,100 h20 v20 h-20 Z" title="Finlanda" />
+    <path id="FR" class="country" d="M550,100 h20 v20 h-20 Z" title="Franța" />
+    <path id="GE" class="country" d="M580,100 h20 v20 h-20 Z" title="Georgia" />
+    <path id="DE" class="country" d="M610,100 h20 v20 h-20 Z" title="Germania" />
+    <path id="GR" class="country" d="M640,100 h20 v20 h-20 Z" title="Grecia" />
+    <path id="HU" class="country" d="M670,100 h20 v20 h-20 Z" title="Ungaria" />
+    <path id="IS" class="country" d="M700,100 h20 v20 h-20 Z" title="Islanda" />
+    <path id="IE" class="country" d="M730,100 h20 v20 h-20 Z" title="Irlanda" />
+    <path id="IT" class="country" d="M760,100 h20 v20 h-20 Z" title="Italia" />
+    <path id="XK" class="country" d="M790,100 h20 v20 h-20 Z" title="Kosovo" />
+    <path id="LV" class="country" d="M820,100 h20 v20 h-20 Z" title="Letonia" />
+    <path id="LI" class="country" d="M850,100 h20 v20 h-20 Z" title="Liechtenstein" />
+    <path id="LT" class="country" d="M880,100 h20 v20 h-20 Z" title="Lituania" />
+    <path id="LU" class="country" d="M910,100 h20 v20 h-20 Z" title="Luxemburg" />
+    <path id="MT" class="country" d="M100,130 h20 v20 h-20 Z" title="Malta" />
+    <path id="MD" class="country" d="M130,130 h20 v20 h-20 Z" title="Moldova" />
+    <path id="MC" class="country" d="M160,130 h20 v20 h-20 Z" title="Monaco" />
+    <path id="ME" class="country" d="M190,130 h20 v20 h-20 Z" title="Muntenegru" />
+    <path id="NL" class="country" d="M220,130 h20 v20 h-20 Z" title="Olanda" />
+    <path id="MK" class="country" d="M250,130 h20 v20 h-20 Z" title="Macedonia de Nord" />
+    <path id="NO" class="country" d="M280,130 h20 v20 h-20 Z" title="Norvegia" />
+    <path id="PL" class="country" d="M310,130 h20 v20 h-20 Z" title="Polonia" />
+    <path id="PT" class="country" d="M340,130 h20 v20 h-20 Z" title="Portugalia" />
+    <path id="RO" class="country" d="M370,130 h20 v20 h-20 Z" title="România" />
+    <path id="RU" class="country" d="M400,130 h20 v20 h-20 Z" title="Rusia" />
+    <path id="SM" class="country" d="M430,130 h20 v20 h-20 Z" title="San Marino" />
+    <path id="RS" class="country" d="M460,130 h20 v20 h-20 Z" title="Serbia" />
+    <path id="SK" class="country" d="M490,130 h20 v20 h-20 Z" title="Slovacia" />
+    <path id="SI" class="country" d="M520,130 h20 v20 h-20 Z" title="Slovenia" />
+    <path id="ES" class="country" d="M550,130 h20 v20 h-20 Z" title="Spania" />
+    <path id="SE" class="country" d="M580,130 h20 v20 h-20 Z" title="Suedia" />
+    <path id="CH" class="country" d="M610,130 h20 v20 h-20 Z" title="Elveția" />
+    <path id="TR" class="country" d="M640,130 h20 v20 h-20 Z" title="Turcia" />
+    <path id="UA" class="country" d="M670,130 h20 v20 h-20 Z" title="Ucraina" />
+    <path id="UK" class="country" d="M700,130 h20 v20 h-20 Z" title="Marea Britanie" />
+    <path id="VA" class="country" d="M730,130 h20 v20 h-20 Z" title="Vatican" />
+  </g>
 </svg>
 
 <script>
-  const counters = {
-    RO: 0,
-    DE: 0,
-    FR: 0
-  };
+  const countries = [
+    'AL','AD','AM','AT','AZ','BY','BE','BA','BG','HR','CY','CZ','DK','EE','FI','FR','GE','DE','GR','HU','IS','IE','IT','XK','LV','LI','LT','LU','MT','MD','MC','ME','NL','MK','NO','PL','PT','RO','RU','SM','RS','SK','SI','ES','SE','CH','TR','UA','UK','VA'
+  ];
+
+  const counters = {};
+  const displayDiv = document.getElementById('counter-display');
+
+  countries.forEach(code => {
+    counters[code] = 0;
+    const p = document.createElement('p');
+    p.innerHTML = `<strong>${code}</strong>: <span id="${code}-count">0</span>`;
+    displayDiv.appendChild(p);
+  });
 
   document.querySelectorAll('.country').forEach(el => {
     el.addEventListener('click', () => {
       const id = el.id;
       counters[id]++;
-      document.getElementById(id.toLowerCase() + '-count').textContent = counters[id];
+      document.getElementById(id + '-count').textContent = counters[id];
     });
   });
 </script>
