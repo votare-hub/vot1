@@ -2,21 +2,72 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Harta Europei Interactivă</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha512-sA+e2c2Ka6YyH5N2D0kpz7uD84c3MxgT+GoRZJ0uFs5gZ+mXW3uFbh0r8Do+kAcMcJFdUkn4SFl+4A7kfSdwvA=="
+    crossorigin=""
+  />
   <style>
     body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 2rem;
+      margin: 0;
+      font-family: Arial, sans-serif;
     }
-    svg {
-      width: 90%;
-      max-width: 800px;
+    #map {
+      height: 100vh;
+      width: 100%;
     }
-    path {
-      fill: #cce5ff;
-      stroke: #333;
-      stroke-width: 0.5;
-      cursor: pointer;
-      transition: fill 0.2s
+    .info-box {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="info-box" id="info">Fă clic pe o țară</div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha512-nmmfD9ByLE1TIBU9H2qUeURgKM5jEYJLaDF+Wuv6qIfDKtvFIs72g/2JoKk6OKtxpIFXjP7duO3w6RTvugW6Kw=="
+    crossorigin=""
+  ></script>
+  <script src="https://unpkg.com/leaflet-geojson-layer"></script>
+  <script>
+    const map = L.map('map').setView([54, 15], 4);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 10,
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    fetch('https://raw.githubusercontent.com/leakyMirror/map-of-europe/master/GeoJSON/europe.geojson')
+      .then(res => res.json())
+      .then(geojson => {
+        L.geoJSON(geojson, {
+          onEachFeature: function (feature, layer) {
+            layer.on('click', function () {
+              document.getElementById('info').innerText =
+                'Țara selectată: ' + feature.properties.NAME;
+            });
+            layer.bindTooltip(feature.properties.NAME);
+            layer.setStyle({
+              fillColor: '#66b3ff',
+              fillOpacity: 0.5,
+              weight: 1,
+              color: '#333'
+            });
+          }
+        }).addTo(map);
+      });
+  </script>
+</body>
+</html>
